@@ -1,6 +1,5 @@
 const express = require('express');
 const WebSocket = require('ws');
-const cheerio = require('cheerio');
 
 const SocketServer = WebSocket.Server;
 const path = require('path');
