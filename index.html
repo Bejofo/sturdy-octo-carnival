@@ -1,16 +1,17 @@
-<html>
-  <body>
-    <p id='server-time'></p>
-    <script>
-      var HOST = location.origin.replace(/^http/, 'ws')
-      var ws = new WebSocket(HOST);
-      var el = document.getElementById('server-time');
-      function send(x){
-        ws.send(x);
-      }
-      ws.onmessage = function (event) {
-        el.innerHTML +=`${event.data}<br>`;
-      };
-    </script>
-  </body>
-</html>
+<canvas id="nope" width="1500" height="800"></canvas>
+<script>
+var WS = new WebSocket("wss://tpcdda.herokuapp.com/");
+WS.onmessage = function (event) {
+        paintgivenBase64('data:image/png;base64,'+event.data)
+    };
+var canvas = document.getElementById('nope')
+var ctx = canvas.getContext("2d");
+function paintgivenBase64(b){
+   	var image = new Image();
+   	image.onload = function() {
+   		ctx.clearRect(0, 0, canvas.width, canvas.height);
+     		ctx.drawImage(image, 0, 0);
+   	};
+   	image.src = b;
+ }
+</script>
