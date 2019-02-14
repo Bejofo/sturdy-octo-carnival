@@ -16,8 +16,8 @@ const wss = new SocketServer({ server });
 wss.on('connection', function connection(ws) {
   console.log('WS opened');
   ws.on('message', function incoming(data) {
-    console.log(data);
 	if(data.split('|')[0] === process.env.key){
+	console.log('authed');
     wss.clients.forEach(function each(client) {
       if (client !== ws && client.readyState === WebSocket.OPEN) {
         client.send(data.split('|')[1]);
